@@ -20,7 +20,7 @@ class MyShared_Ptr{
             ref_count = new int(1);
         }
     }
-
+    // copy semantics 
     MyShared_Ptr(const MyShared_Ptr &other) {
         ptr_ = other.ptr_;
         ref_count = other.ref_count;
@@ -40,6 +40,33 @@ class MyShared_Ptr{
 
         return *this;
     }
+
+
+    // move semantics
+
+    MyShared_Ptr(MyShared_Ptr &&other) {
+        
+        ptr_ = other.ptr_;
+        ref_count = other.ref_count;
+
+        other.ptr_ = nullptr;
+        other.ref_count = nullptr;
+    }
+
+
+    MyShared_Ptr& operator=(MyShared_Ptr &&other) {
+
+        if (this != &other) {
+            release();
+            ptr_ = other.ptr_;
+            ref_count = other.ref_count;
+            other.ptr_ = nullptr;
+            other.ref_count = nullptr;
+        }
+
+        return *this;
+    }
+
 
 
     ~MyShared_Ptr() {
