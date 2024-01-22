@@ -1,26 +1,20 @@
-#include<iostream>
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        
+        ListNode * curr = head;
+        ListNode * prev = nullptr , * next = nullptr;
 
-using namespace std;
+        while(curr) {
 
-struct Node {
-    int val ;
-    Node * next;
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+
+        } 
+        
+        head = prev;
+        return head;
+    }
 };
-
-void ReverseLinkedList(Node * head){
-
-   Node * temp = head ;
-   Node * forward = head->next;
-
-    temp->next = nullptr;
-
-   while(temp) {
-        Node * another = forward->next;
-        forward->next = temp;
-        forward = another;
-        temp = forward;
-   }
-
-   head = temp ;
-
-}
