@@ -103,7 +103,7 @@ int main(){
     str6.PrintString();
     //str1.SubStr(3);
 
-    //unique_ptr<MyString> str_up = make_unique<MyString>("Abhishek");
-
+    unique_ptr<MyString> str_up = make_unique<MyString>("Abhishek");
+    unique_ptr<MyString> str2_up(new MyString("jhvjhv"));
 
 }
