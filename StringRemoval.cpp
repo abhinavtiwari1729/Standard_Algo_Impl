@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 bool CheckForSmallercharacter(string &input , char ch , int start , int end ){
     if(start > end)
         return false;
@@ -17,9 +16,6 @@ bool CheckForSmallercharacter(string &input , char ch , int start , int end ){
     return false;
 }
 
-
-
-
 string RemoveDuplicatewithOrdering(string input , map<char , vector<int>> &char_map , string &ans){
 
     for (int i = 0 ; i < input.size() ; i++){
@@ -31,7 +27,7 @@ string RemoveDuplicatewithOrdering(string input , map<char , vector<int>> &char_
             ans.push_back(input[i]);
         
         else {
-           // for (int i = 0 ; i < char_repeater.size()-1 ; i++){
+           
                 
                 int start = char_repeater[0];
                 int end = char_repeater[1];
@@ -43,7 +39,6 @@ string RemoveDuplicatewithOrdering(string input , map<char , vector<int>> &char_
                     char_repeater.erase(char_repeater.begin());
                 }
 
-         //   }
         }
     }
 
