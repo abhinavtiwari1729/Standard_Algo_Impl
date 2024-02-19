@@ -10,7 +10,6 @@ void ReverseString(string & name , int start , int end) {
     
     swap(name[start] , name[end]);
     ReverseString(name , start+1 , end-1);
-
 }
 
 int main() {
@@ -20,7 +19,6 @@ int main() {
     getline(cin , name );
     cout << name << endl ;
     ReverseString(name , 0 , name.size()-1);
-
     cout << name << endl;
-
+    
 }
