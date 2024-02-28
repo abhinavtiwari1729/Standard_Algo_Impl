@@ -15,8 +15,6 @@ struct Node {
 };
 
 
-
-
 void PreorderTraversal(Node * root , vector<Node *> &vc) {
 
     if (!root)

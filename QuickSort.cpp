@@ -26,7 +26,6 @@ int partition(vector<int> &nums , int start , int end) {
     return i ;
 }
 
-
 void QuickSort(vector<int> &nums , int start , int end) {
 
     if (start >= end)

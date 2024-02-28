@@ -32,5 +32,4 @@ int main(){
     auto print_f = bind(entity::func , E , placeholders::_1);
     print_f(2);
 
-
 }
