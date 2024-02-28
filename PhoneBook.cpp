@@ -1,129 +1,85 @@
 #include<iostream>
-#include<vector>
-#include<unordered_set>
+#include<string>
 
 using namespace std;
 
-struct Trie{
+class TrieNode{
 
-    int *collection;
-    Trie * next_node;
-    bool delimiter[26];
-  
-    Trie(){
-        collection = new int[26];
-        for (int i = 0 ; i < 26 ; i++){
-            collection[i] = 0;
-            delimiter[i] = false;
+public:
+    bool isWord;
+    TrieNode* list[26];
+
+    TrieNode(){
+        for(int i = 0 ; i < 26 ; i++){
+            list[i] = nullptr;
         }
-        next_node = nullptr;
 
+        isWord = false;
     }
 
 };
 
 
-void insert (Trie **node , string name){
-    int i = 0;
-    Trie *itr = *node;
-    for (; i < name.size()-1 ; i++){
 
-        if(itr->collection[name[i]-'a'] == 1){
-            if(itr->next_node){
-                itr = itr->next_node;
-            }                
-            else {
-                itr->next_node = new Trie();
-                itr = itr->next_node;
-            }
-        }
-        else {
-                std::cout << "inserting charcter - : " << name[i] << " at position :" << name[i] - 'a'<<  endl;
-                itr->collection[name[i]- 'a'] == 1;
-                if (itr->next_node){
-                    itr = itr->next_node;
-                }
-                else {
-                    itr->next_node = new Trie();
-                    itr = itr->next_node;
-                }
-            }
-        }
+class Trie {
+private:
 
-        std::cout << "inserting charcter -" << name[i] << " at position- " << name[i] - 'a'<<  endl;
-        std::cout << "marking this charcter -" << name[i] << " as end" << endl;
-        (*node)->collection[name[i]-'a'] = 1;
-        (*node)->delimiter[name[i]-'a'] = true;
+    TrieNode * root;
+
+public:
+    Trie() {
+        root = new TrieNode();
     }
 
-
-void PrintTrie(Trie *node ){
-
-while(node){
-
-
-    for (int i = 0 ; i < 26 ; i++){
-        if(node->collection[i] == 1)
-        std::cout << i <<" " <<node->collection[i] << endl;
-    }
-    node = node->next_node;
-
-}
-
-}
-
-
-
-
-
-bool Search(Trie *node , string name ){
-
-    if (!node){
-        std::cout << "returning false because of null head of trie" << endl;    
-        return false;
-    }
-    int i = 0 ;
-    for (; i < name.size()-1 ; i++){
+    void insert(string word) {
         
-        if (!node){
-            std::cout << "returning false because coming next level node is null" << endl;    
-            return false;
-        }
-        if(node->collection[name[i]-'a'] == 1){
-            std::cout << "character : " << name[i] << " is matching" << endl;
-            node = node->next_node;
-        } 
-        else{
-            std::cout << "returning false because charcter : - "<< name[i] << " does not match" << endl;
-            return false;
-        }
-    }
+        TrieNode *node = root;
+        for(int i = 0 ;  i<word.size() ; i++){
 
-    std::cout << "checking for last charcter :- " << name[i] << endl;
-    if (node->collection[name[i]-'a'] == 1 && node->delimiter[name[i] - 'a'] == true){
-        std::cout << "match has been found" << endl;
-        return true;
+            if(node->list[word[i] - 'a'] == nullptr){
+               node->list[word[i] - 'a'] = new TrieNode();
+               node =  node->list[word[i] - 'a'];        
+            }
+            else{
+                node = node->list[word[i] - 'a'];
+            }    
+        }
+        node->isWord = true;
     }
     
-    std::cout << "last charcter match not found" << endl;
-    return false;
-}
+    bool search(string word) {
+        
+        TrieNode *node = root;
+        for(int i = 0 ;  i<word.size() ;  i++) {
 
-int main() {
+            if(node->list[word[i]-'a'] == nullptr)
+                return false;
+            else
+                node = node->list[word[i]-'a'];
+        }
+        if(node->isWord == true)
+            return true;
+        return false;
+    }
+    
+    bool startsWith(string word) {
+        TrieNode *node = root;
+        for(int i = 0 ;  i<word.size() ;  i++) {
 
-Trie *head = new Trie();
-//Trie main_head = &head ;
-string s1 = "abhinav";
-//string s2 = "tarun";
-insert(&head , s1);
-//insert(head , s2);
+            if(node->list[word[i]-'a'] == nullptr)
+                return false;
+            else
+                node = node->list[word[i]-'a'];
+        }
 
-PrintTrie(head);
+        return true;
+    }
+};
 
-
-// if (Search(head , s1))
-//     cout << s1 << "is present " << endl;
-// else 
-//     cout << s1 << "is not present " << endl;
-
-}
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
