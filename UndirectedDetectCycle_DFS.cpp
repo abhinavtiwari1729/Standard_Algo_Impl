@@ -8,10 +8,11 @@ bool isCyclicUtil(int node , vector<bool> &visited , vector<int> adj[] , int par
 
     for(auto adj_node : adj[node]){
 
-        if(!visited[adj_node])
-            return isCyclicUtil(adj_node , visited , adj , node);
-
-        else if(parent != node)
+        if(!visited[adj_node]){
+            if(isCyclicUtil(adj_node , visited , adj , node))
+                return true;
+        }
+        else if(parent != adj_node)
             return true;
     }
 
