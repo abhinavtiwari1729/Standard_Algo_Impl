@@ -28,8 +28,6 @@ class Collection{
 
 };
 
-
-
 int main(){
 
     Collection c1;
