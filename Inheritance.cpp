@@ -22,7 +22,6 @@ class Monster : public Entity{
     ~Monster(){
         cout << "Monster destructor" << endl;
     }
-
 };
 int main(){
     Monster m1;
