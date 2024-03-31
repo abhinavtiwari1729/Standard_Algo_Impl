@@ -16,7 +16,6 @@ template<typename T>
 class UniquePtr {
     private:
     T *ptr_ ;
-
     public:
 
     UniquePtr() : ptr_(nullptr){}
