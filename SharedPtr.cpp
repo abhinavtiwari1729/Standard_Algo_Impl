@@ -5,7 +5,6 @@ using namespace std;
 
 template<typename T>
 class MyShared_Ptr{
-
     private:
     
     T * ptr_ = nullptr;
