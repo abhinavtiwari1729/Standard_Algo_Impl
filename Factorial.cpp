@@ -10,9 +10,6 @@ long long factorial(long long number) {
         return (number * factorial(number-1));
 }
 
-
-
-
 int main(){
 
     long long ans = factorial(20);
